@@ -1,20 +1,8 @@
 module StripeWebhooks
   class Callback
 
-    @callbacks = []
-
     module ClassMethods
-      attr_reader :callbacks, :event_types
-
-      # Add a callback to be ran whenever a new event is recorded
-      #
-      # === Example
-      #
-      #  StripeWebhooks::Callback.register_callback('my_callback')
-      # 
-      def register_callback(label)
-        @callbacks << label
-      end
+      attr_reader :event_types
 
       # Run callbacks for a given event type
       #
@@ -23,7 +11,7 @@ module StripeWebhooks
       #  StripeWebhooks::Callback.run_callbacks_for('customer.subscription.deleted', stripe_event)
       #
       def run_callbacks_for(event_type, event)
-        @callbacks.each do |label|
+        StripeWebhooks.callbacks.each do |label|
           class_name = "#{label.classify}Callback"
           callback = class_name.constantize.new
           if callback.handles?(event_type)

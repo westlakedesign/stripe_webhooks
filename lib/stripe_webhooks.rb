@@ -1,6 +1,6 @@
 require "stripe_webhooks/engine"
-require "stripe_webhooks/callback"
+require "stripe_webhooks/callbacks"
 
 module StripeWebhooks
-
+  include Callbacks
 end

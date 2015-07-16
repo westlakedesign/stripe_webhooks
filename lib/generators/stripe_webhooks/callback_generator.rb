@@ -20,7 +20,7 @@ module StripeWebhooks
         if !File.exist?(initializer)
           create_file(initializer)
         end
-        append_to_file initializer, "StripeWebhooks::Callback.register_callback('#{name.underscore}')\n"
+        append_to_file initializer, "StripeWebhooks.register_callback('#{name.underscore}')\n"
       end
 
     end
