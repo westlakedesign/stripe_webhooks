@@ -1,42 +1,64 @@
 module StripeWebhooks
   class Callback
 
-    @@callbacks = []
+    @callbacks = []
 
-    # Add a callback to be ran whenever a new event is recorded
-    #
-    # === Example
-    #
-    #  StripeWebhooks::Callback.register_callback('my_callback', 'customer.subscription.deleted', 'customer.subscription.created') do |event|
-    #    ... do something useful with the event here
-    #  end
-    # 
-    def self.register_callback(label, *event_types, &block)
-      @@callbacks << new(label, event_types, block)
-    end
+    module ClassMethods
+      attr_reader :callbacks, :event_types
 
-    def self.run_callbacks_for(event_type, event)
-      @@callbacks.each do |callback|
-        if callback.handles?(event_type)
-          callback.run(event)
+      # Add a callback to be ran whenever a new event is recorded
+      #
+      # === Example
+      #
+      #  StripeWebhooks::Callback.register_callback('my_callback')
+      # 
+      def register_callback(label)
+        @callbacks << label
+      end
+
+      # Run callbacks for a given event type
+      #
+      # === Example
+      #
+      #  StripeWebhooks::Callback.run_callbacks_for('customer.subscription.deleted', stripe_event)
+      #
+      def run_callbacks_for(event_type, event)
+        @callbacks.each do |label|
+          callback = label.classify.constantize.new(label)
+          if callback.hands?(event_type)
+            callback.run(event)
+          end
         end
       end
+
+      # Declares which event types a callback will handle
+      #
+      # === Example
+      #
+      #   class MyCallback < StripeWebhooks::Callback
+      #     handles_events 'customer.subscription.deleted', 'customer.subscription.testing'
+      #     def run(event)
+      #       puts "Do useful stuff"
+      #     end
+      #   end
+      #
+      def handles_events(*event_types)
+        @event_types = event_types
+      end
+
     end
+    extend ClassMethods
 
-    attr_reader :label, :event_types, :block
+    attr_reader :label
 
-    def initialize(label, event_types, block)
+    def initialize(label)
       @label = label
-      @event_types = event_types
-      @block = block
     end
 
+    # Return true if the Callback handles this type of event
+    #
     def handles?(event_type)
       return @event_types.include?(event_type)
-    end
-
-    def run(event)
-      @block.call(event)
     end
 
   end
