@@ -1,6 +1,7 @@
 module StripeWebhooks
   class Event < ActiveRecord::Base
     validates :stripe_event_id, :presence => true, :uniqueness => true
+    has_many :performed_callbacks, :primary_key => :stripe_event_id, :foreign_key => :stripe_event_id
 
     def stripe_event
       if created_at < 30.days.ago
