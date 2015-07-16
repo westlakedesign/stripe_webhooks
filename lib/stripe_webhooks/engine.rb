@@ -1,6 +1,7 @@
 module StripeWebhooks
   class Engine < ::Rails::Engine
     isolate_namespace StripeWebhooks
+    config.autoload_paths << "#{root}/lib"
 
     config.generators do |g|
       g.test_framework :rspec, :fixture => false

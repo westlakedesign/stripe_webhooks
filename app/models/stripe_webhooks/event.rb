@@ -21,5 +21,10 @@ module StripeWebhooks
       end
     end
 
+    def run_callbacks!
+      StripeWebhooks::Callback.run_callbacks_for(self.stripe_event_type, self.stripe_event)
+      return true
+    end
+
   end
 end
