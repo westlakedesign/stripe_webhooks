@@ -25,7 +25,7 @@ module StripeWebhooks
       def run_callbacks_for(event_type, event)
         @callbacks.each do |label|
           class_name = "#{label.classify}Callback"
-          callback = class_name.constantize.new(label)
+          callback = class_name.constantize.new
           if callback.handles?(event_type)
             callback.run(event)
           end
@@ -50,10 +50,8 @@ module StripeWebhooks
     end
     extend ClassMethods
 
-    attr_reader :label
+    def initialize
 
-    def initialize(label)
-      @label = label
     end
 
     # Return true if the Callback handles this type of event

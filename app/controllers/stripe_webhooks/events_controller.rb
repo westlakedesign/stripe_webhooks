@@ -12,12 +12,13 @@ module StripeWebhooks
         return
       end
 
-      event = StripeWebhooks::Event.find_or_initialize_by(:stripe_event_id => raw_data['id'])
+      @event = StripeWebhooks::Event.find_or_initialize_by(:stripe_event_id => raw_data['id'])
 
-      if event.save()
+      if @event.save()
+        StripeWebhooks::ProcessorJob.perform_later(@event)
         render :nothing => true, :status => 200
       else
-        render :text => event.errors.full_messages.first, :status => 422
+        render :text => @event.errors.full_messages.first, :status => 422
       end
     end
 
