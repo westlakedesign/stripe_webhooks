@@ -1,0 +1,8 @@
+class <%= name %>Callback < ApplicationCallback
+  handles_events <%= event_types.collect{ |event_type| "'#{event_type}'" }.join(', ') %>
+
+  def run(event)
+
+  end
+
+end

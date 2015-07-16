@@ -24,8 +24,9 @@ module StripeWebhooks
       #
       def run_callbacks_for(event_type, event)
         @callbacks.each do |label|
-          callback = label.classify.constantize.new(label)
-          if callback.hands?(event_type)
+          class_name = "#{label.classify}Callback"
+          callback = class_name.constantize.new(label)
+          if callback.handles?(event_type)
             callback.run(event)
           end
         end
@@ -58,7 +59,7 @@ module StripeWebhooks
     # Return true if the Callback handles this type of event
     #
     def handles?(event_type)
-      return @event_types.include?(event_type)
+      return self.class.event_types.include?(event_type)
     end
 
   end
