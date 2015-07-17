@@ -3,6 +3,10 @@ require 'rails_helper'
 module StripeWebhooks
   RSpec.describe Callbacks do
 
+    class ::HelloWorldCallback < StripeWebhooks::Callback
+      handles_events 'test'
+    end
+
     describe '.register_callback' do
       it 'should append the label to the list of callbacks' do
         expect{
