@@ -1,0 +1,6 @@
+// Note: ID is intentionally left null
+{
+  "created": 1326853478,
+  "id": null,
+  "type": "charge.succeeded"
+}
