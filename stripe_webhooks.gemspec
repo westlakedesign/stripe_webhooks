@@ -9,9 +9,9 @@ Gem::Specification.new do |s|
   s.version     = StripeWebhooks::VERSION
   s.authors     = ["Westlake Interactive"]
   s.email       = ["greg@westlakedesign.com"]
-  s.homepage    = "TODO"
-  s.summary     = "TODO: Summary of StripeWebhooks."
-  s.description = "TODO: Description of StripeWebhooks."
+  s.homepage    = "https://github.com/westlakedesign/stripe_webhooks"
+  s.summary     = "Stripe Webhook event capture and processing engine."
+  s.description = "Provides an endpoint for captring data posted via Webhooks in Stripe, and a system for running callbacks in response to desired event types."
   s.license     = "MIT"
 
   s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.md"]
