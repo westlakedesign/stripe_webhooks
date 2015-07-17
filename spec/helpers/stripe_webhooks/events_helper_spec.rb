@@ -12,6 +12,6 @@ require 'rails_helper'
 # end
 module StripeWebhooks
   RSpec.describe EventsHelper, type: :helper do
-    pending "add some examples to (or delete) #{__FILE__}"
+
   end
 end

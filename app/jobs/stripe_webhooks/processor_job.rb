@@ -3,7 +3,6 @@ module StripeWebhooks
     queue_as :default
 
     def perform(event)
-      puts "running!"
       event.validate!
       if event.is_authentic?
         event.run_callbacks!
