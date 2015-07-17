@@ -25,4 +25,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'factory_girl_rails', '~> 4.5.0'
   s.add_development_dependency 'database_cleaner', '~> 1.4.1'
   s.add_development_dependency 'simplecov', '~> 0.9.2'
+  s.add_development_dependency 'stripe-ruby-mock', '2.1.0'
 end
