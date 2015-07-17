@@ -38,6 +38,37 @@ First, install and configure the [stripe](https://rubygems.org/gems/stripe) gem 
 
 5. Restart your application
 
-## Usage
+## Configuration
 
-TODO: This project is in the early development phase. This section will be updated as soon as the dust starts to settle.
+Once the gem has been installed and configured, log in to your Stripe account and [configure the webhook](https://stripe.com/docs/webhooks#configuring-your-webhook-settings) with your application endpoint.
+
+The `stripe_webhooks` gem will capture and process events using [ActiveJob](http://guides.rubyonrails.org/active_job_basics.html). The default behavior for ActiveJob is to run tasks immediately; It is strongly recommended that you configure a background queue instead. See the ActiveJob docs for a list of available queueing back ends.
+
+## Callbacks
+
+Create a callback object using the generator, which accepts a name argument followed by a list of stripe event types.
+
+    rails g stripe_webhooks:callback Customer customer.created customer.updated customer.deleted
+
+*See the [official documentation](https://stripe.com/docs/api/ruby#event_types) for a list of possible events.*
+
+This will do a few things for you:
+
+1. Appends an entry to `config/initializers/stripe_webhook_callbacks.rb`, and creates this file if it does not exist.
+2. Creates a new callback object at `app/callbacks/NAME_callback.rb`
+
+A callback is a simple ruby object with a `#run` method.
+
+    class CustomerCallback < ApplicationCallback
+      handles_events 'customer.created', 'customer.updated', 'customer.deleted'
+
+      def run(event)
+        # do useful stuff here!
+      end
+
+    end
+
+Callbacks must be registered in order to be recognized. If you ran the generator, this will have been done for you in an initializer.
+
+    StripeWebhooks.register_callback('customer')
+
