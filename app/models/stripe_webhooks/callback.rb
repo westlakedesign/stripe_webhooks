@@ -37,6 +37,10 @@ module StripeWebhooks
     end
     extend ClassMethods
 
+    def logger
+      return Rails.logger
+    end
+
     # Return the label for the callback. Label is based on the class name.
     #
     def label
