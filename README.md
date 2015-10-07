@@ -1,7 +1,5 @@
 # StripeWebhooks
 
-**NOTICE**: This project is in early development. As such, I don't recommend using it for anything serious just yet. You have been warned! 
-
 StripeWebhooks is a Rails engine for dealing with data posted from [Stripe via Webhooks](https://stripe.com/docs/webhooks).
 
 ## Goals
