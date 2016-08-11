@@ -4,9 +4,7 @@ module StripeWebhooks
 
     def perform(event)
       event.validate!
-      if event.is_authentic?
-        event.run_callbacks!
-      end
+      event.run_callbacks! if event.is_authentic?
     end
 
   end

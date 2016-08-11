@@ -2,12 +2,11 @@ require 'rails_helper'
 
 module StripeWebhooks
   RSpec.describe Callback, type: :model do
-
     class ::CustomerCallback < StripeWebhooks::Callback
       handles_events 'customer.created', 'customer.updated'
       mattr_accessor :callback_has_ran
       mattr_accessor :run_count
-      def run(event)
+      def run(_event)
         self.run_count += 1
         self.callback_has_ran = true
       end
@@ -69,9 +68,9 @@ module StripeWebhooks
         callback = CustomerCallback.new()
         event = StripeMock.mock_webhook_event('customer.created')
         callback.run_once(event)
-        expect{
+        expect do
           callback.run_once(event)
-        }.to_not change(CustomerCallback, :run_count)
+        end.to_not change(CustomerCallback, :run_count)
         expect(CustomerCallback.run_count).to eq(1)
       end
     end
@@ -87,6 +86,5 @@ module StripeWebhooks
         expect(callback.handles?('charge.succeeded')).to eq(false)
       end
     end
-
   end
 end

@@ -2,7 +2,6 @@ require 'rails_helper'
 
 module StripeWebhooks
   RSpec.describe Callbacks do
-
     # We need to reset the callbacks array to its original state after this spec runs
     before(:all) do
       @callbacks_original = StripeWebhooks.callbacks
@@ -20,6 +19,5 @@ module StripeWebhooks
         expect(StripeWebhooks.callbacks.last).to eq('some_callback')
       end
     end
-
   end
 end

@@ -4,7 +4,7 @@ require 'rails/all'
 require 'stripe'
 
 Bundler.require(*Rails.groups)
-require "stripe_webhooks"
+require 'stripe_webhooks'
 
 module Dummy
   class Application < Rails::Application

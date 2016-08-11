@@ -12,6 +12,5 @@ require 'rails_helper'
 # end
 module StripeWebhooks
   RSpec.describe EventsHelper, type: :helper do
-
   end
 end

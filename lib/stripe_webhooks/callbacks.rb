@@ -1,6 +1,5 @@
 module StripeWebhooks
   module Callbacks
-
     def self.included(base)
       base.instance_variable_set(:@callbacks, [])
       base.extend ClassMethods
@@ -19,6 +18,5 @@ module StripeWebhooks
         @callbacks << label unless @callbacks.include?(label)
       end
     end
-
   end
 end
