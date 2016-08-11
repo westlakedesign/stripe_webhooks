@@ -1,6 +1,8 @@
 # StripeWebhooks
 
 [![Code Climate](https://codeclimate.com/github/westlakedesign/stripe_webhooks/badges/gpa.svg)](https://codeclimate.com/github/westlakedesign/stripe_webhooks)
+[![Test Coverage](https://codeclimate.com/github/westlakedesign/stripe_webhooks/badges/coverage.svg)](https://codeclimate.com/github/westlakedesign/stripe_webhooks/coverage)
+[![Build Status](https://semaphoreci.com/api/v1/moser-it/stripe_webhooks/branches/master/shields_badge.svg)](https://semaphoreci.com/moser-it/stripe_webhooks)
 
 StripeWebhooks is a Rails engine for dealing with data posted from [Stripe via Webhooks](https://stripe.com/docs/webhooks).
 
