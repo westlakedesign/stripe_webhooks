@@ -11,7 +11,6 @@ module StripeWebhooks
         self.callback_has_ran = true
       end
     end
-    StripeWebhooks.register_callback('customer')
 
     # Reset the callback_has_ran flag for each test so we can tell if the callback was triggered
     before(:each) do
@@ -42,11 +41,14 @@ module StripeWebhooks
     describe '.inherited' do
       it 'should automatically register subclasses' do
         expect do
-          class ::HelloWorldCallback < StripeWebhooks::Callback
+          class ::HelloWorldCallback < ApplicationCallback
             handles_events 'test'
           end
         end.to change(StripeWebhooks.callbacks, :length).by(1)
         expect(StripeWebhooks.callbacks.last).to eq('hello_world')
+      end
+      it 'should not register the application callback base class' do
+        expect(StripeWebhooks.callbacks).to_not include('application')
       end
     end
 
