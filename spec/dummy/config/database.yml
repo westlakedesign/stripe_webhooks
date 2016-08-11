@@ -6,8 +6,9 @@
 #
 default: &default
   adapter: mysql2
-  username: root
+  username: <%= ENV['DATABASE_USERNAME'] || 'root' %>
 
 test:
   <<: *default
-  database: stripe_webhooks_test
+  database: <%= ENV['DATABASE_NAME_TEST'] || 'stripe_webhooks_test' %>
+  password: <%= ENV['DATABASE_PASSWORD'] %>
