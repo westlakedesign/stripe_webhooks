@@ -14,6 +14,10 @@ module StripeWebhooks
           template 'application_callback.rb.erb', application_callback
         end
         template 'callback.rb.erb', "app/callbacks/#{name.underscore}_callback.rb"
+
+        if defined?(RSpec)
+          template 'callback_spec.rb.erb', "#{RSpec.configuration.default_path}/callbacks/#{name.underscore}_callback_spec.rb"
+        end
       end
 
     end
