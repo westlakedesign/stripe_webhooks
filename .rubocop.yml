@@ -6,6 +6,7 @@ AllCops:
     - 'config.ru'
     - 'db/**/*'
     - 'deploy/*'
+    - 'vendor/**/*'
     - 'spec/dummy/bin/*'
     - 'spec/dummy/db/**/*'
 
