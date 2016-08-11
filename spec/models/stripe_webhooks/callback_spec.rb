@@ -40,6 +40,17 @@ module StripeWebhooks
       end
     end
 
+    describe '.inherited' do
+      it 'should automatically register subclasses' do
+        expect do
+          class ::HelloWorldCallback < StripeWebhooks::Callback
+            handles_events 'test'
+          end
+        end.to change(StripeWebhooks.callbacks, :length).by(1)
+        expect(StripeWebhooks.callbacks.last).to eq('hello_world')
+      end
+    end
+
     describe '#label' do
       it 'should return a label string' do
         expect(CustomerCallback.new.label).to eq('customer')

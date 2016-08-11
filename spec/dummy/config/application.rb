@@ -1,6 +1,7 @@
 require File.expand_path('../boot', __FILE__)
 
 require 'rails/all'
+require 'stripe'
 
 Bundler.require(*Rails.groups)
 require "stripe_webhooks"
@@ -23,4 +24,3 @@ module Dummy
     config.active_record.raise_in_transactional_callbacks = true
   end
 end
-

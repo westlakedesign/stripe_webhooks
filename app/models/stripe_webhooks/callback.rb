@@ -34,6 +34,12 @@ module StripeWebhooks
       def handles_events(*event_types)
         @event_types = event_types
       end
+
+      # Automatically register subclasses
+      #
+      def inherited(subclass)
+        StripeWebhooks.register_callback(subclass.new.label)
+      end
     end
     extend ClassMethods
 

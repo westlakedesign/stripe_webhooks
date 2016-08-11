@@ -65,8 +65,3 @@ A callback is a simple ruby object with a `#run` method.
       end
 
     end
-
-Callbacks must be registered in order to be recognized. If you ran the generator, this will have been done for you in an initializer.
-
-    StripeWebhooks.register_callback('customer')
-

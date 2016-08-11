@@ -14,9 +14,9 @@ module StripeWebhooks
       # === Example
       #
       #  StripeWebhooks.register_callback('my_callback')
-      #  
+      #
       def register_callback(label)
-        @callbacks << label
+        @callbacks << label unless @callbacks.include?(label)
       end
     end
 
