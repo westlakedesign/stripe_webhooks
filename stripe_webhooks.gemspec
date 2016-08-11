@@ -28,4 +28,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'simplecov', '~> 0.9.2'
   s.add_development_dependency 'stripe-ruby-mock'
   s.add_development_dependency 'rubocop'
+  s.add_development_dependency 'codeclimate-test-reporter'
 end

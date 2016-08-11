@@ -46,6 +46,8 @@ GEM
     arel (6.0.3)
     ast (2.3.0)
     builder (3.2.2)
+    codeclimate-test-reporter (0.4.7)
+      simplecov (>= 0.7.1, < 1.0.0)
     concurrent-ruby (1.0.2)
     dante (0.2.0)
     database_cleaner (1.4.1)
@@ -170,6 +172,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  codeclimate-test-reporter
   database_cleaner (~> 1.4.1)
   factory_girl_rails (~> 4.5.0)
   mysql2
