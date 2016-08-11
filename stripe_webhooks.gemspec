@@ -7,8 +7,8 @@ require "stripe_webhooks/version"
 Gem::Specification.new do |s|
   s.name        = "stripe_webhooks"
   s.version     = StripeWebhooks::VERSION
-  s.authors     = ["Westlake Interactive"]
-  s.email       = ["greg@westlakedesign.com"]
+  s.authors     = ["Moser Consulting"]
+  s.email       = ["greg.woods@moserit.com"]
   s.homepage    = "https://github.com/westlakedesign/stripe_webhooks"
   s.summary     = "Stripe Webhook event capture and processing engine."
   s.description = "Provides an endpoint for captring data posted via Webhooks in Stripe, and a system for running callbacks in response to desired event types."
