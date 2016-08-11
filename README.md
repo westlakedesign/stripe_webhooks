@@ -52,12 +52,7 @@ Create a callback object using the generator, which accepts a name argument foll
 
 *See the [official documentation](https://stripe.com/docs/api/ruby#event_types) for a list of possible events.*
 
-This will do a few things for you:
-
-1. Appends an entry to `config/initializers/stripe_webhook_callbacks.rb`, and creates this file if it does not exist.
-2. Creates a new callback object at `app/callbacks/NAME_callback.rb`
-
-A callback is a simple ruby object with a `#run` method.
+This will creates a new callback object at `app/callbacks/NAME_callback.rb`. A callback is a simple ruby object with a `handles_events` declaration and a `#run` method.
 
     class CustomerCallback < ApplicationCallback
       handles_events 'customer.created', 'customer.updated', 'customer.deleted'
