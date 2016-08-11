@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    stripe_webhooks (0.2)
+    stripe_webhooks (0.3)
       rails (< 5.0)
       stripe (>= 1.18.0)
 
