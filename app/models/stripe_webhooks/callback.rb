@@ -14,9 +14,7 @@ module StripeWebhooks
         StripeWebhooks.callbacks.each do |label|
           class_name = "#{label.classify}Callback"
           callback = class_name.constantize.new
-          if callback.handles?(event_type)
-            callback.run_once(event)
-          end
+          callback.run_once(event) if callback.handles?(event_type)
         end
       end
 
@@ -34,6 +32,12 @@ module StripeWebhooks
       def handles_events(*event_types)
         @event_types = event_types
       end
+
+      # Automatically register subclasses
+      #
+      def inherited(subclass)
+        StripeWebhooks.register_callback(subclass.new.label)
+      end
     end
     extend ClassMethods
 
@@ -50,9 +54,9 @@ module StripeWebhooks
     # Run the callback only if we have not run it once before
     #
     def run_once(event)
-      if !StripeWebhooks::PerformedCallback.exists?(:stripe_event_id => event.id, :label => label)
+      unless StripeWebhooks::PerformedCallback.exists?(stripe_event_id: event.id, label: label)
         run(event)
-        StripeWebhooks::PerformedCallback.create(:stripe_event_id => event.id, :label => label)
+        StripeWebhooks::PerformedCallback.create(stripe_event_id: event.id, label: label)
       end
     end
 

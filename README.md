@@ -1,5 +1,7 @@
 # StripeWebhooks
 
+[![Code Climate](https://codeclimate.com/github/westlakedesign/stripe_webhooks/badges/gpa.svg)](https://codeclimate.com/github/westlakedesign/stripe_webhooks)
+
 StripeWebhooks is a Rails engine for dealing with data posted from [Stripe via Webhooks](https://stripe.com/docs/webhooks).
 
 ## Goals
@@ -65,8 +67,3 @@ A callback is a simple ruby object with a `#run` method.
       end
 
     end
-
-Callbacks must be registered in order to be recognized. If you ran the generator, this will have been done for you in an initializer.
-
-    StripeWebhooks.register_callback('customer')
-
