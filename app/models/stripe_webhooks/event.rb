@@ -8,7 +8,7 @@ module StripeWebhooks
         Rails.logger.warn('The event you requested was created over 30 days ago,
                           which means it may no longer be available via the Stripe Events API.')
       end
-      @_stripe_event ||= Stripe::Event.retrieve(stripe_event_id)
+      @_stripe_event ||= fetch_event
       return @_stripe_event
     end
 
@@ -30,6 +30,16 @@ module StripeWebhooks
     def run_callbacks!
       StripeWebhooks::Callback.run_callbacks_for(stripe_event_type, stripe_event)
       return true
+    end
+
+    private
+
+    def fetch_event
+      if user_id
+        Stripe::Event.retrieve(stripe_event_id, stripe_account: user_id)
+      else
+        Stripe::Event.retrieve(stripe_event_id)
+      end
     end
 
   end

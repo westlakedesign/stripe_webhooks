@@ -1,4 +1,3 @@
-# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -11,27 +10,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150716195741) do
+ActiveRecord::Schema.define(version: 20170201180822) do
 
-  create_table "stripe_webhooks_events", force: :cascade do |t|
-    t.string   "stripe_event_id",   limit: 255
-    t.string   "stripe_event_type", limit: 255
+  create_table "stripe_webhooks_events", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "stripe_event_id"
+    t.string   "stripe_event_type"
     t.datetime "stripe_created_at"
-    t.boolean  "is_processed",                  default: false
-    t.boolean  "is_authentic",                  default: false
-    t.datetime "created_at",                                    null: false
-    t.datetime "updated_at",                                    null: false
+    t.boolean  "is_processed",      default: false
+    t.boolean  "is_authentic",      default: false
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
+    t.string   "user_id"
+    t.boolean  "livemode",          default: false
+    t.index ["stripe_event_id"], name: "index_stripe_webhooks_events_on_stripe_event_id", unique: true, using: :btree
   end
 
-  add_index "stripe_webhooks_events", ["stripe_event_id"], name: "index_stripe_webhooks_events_on_stripe_event_id", unique: true, using: :btree
-
-  create_table "stripe_webhooks_performed_callbacks", force: :cascade do |t|
-    t.string   "stripe_event_id", limit: 255, null: false
-    t.string   "label",           limit: 255, null: false
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
+  create_table "stripe_webhooks_performed_callbacks", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "stripe_event_id", null: false
+    t.string   "label",           null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.index ["stripe_event_id", "label"], name: "index_stripe_webhooks_performed_callbacks_event_id_label", using: :btree
   end
-
-  add_index "stripe_webhooks_performed_callbacks", ["stripe_event_id", "label"], name: "index_stripe_webhooks_performed_callbacks_event_id_label", using: :btree
 
 end
