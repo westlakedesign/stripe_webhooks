@@ -61,7 +61,7 @@ Style/Documentation:
 
 # I like using parens because it makes the intention clear that you are calling a method
 #
-Style/MethodCallParentheses:
+Style/MethodCallWithoutArgsParentheses:
   Enabled: false
 
 # While this is intended to aid upgrading, adding frozen_string_literal: true to the top of
@@ -80,12 +80,34 @@ Style/GuardClause:
 Style/WordArray:
   Enabled: false
 
-# It's ok to have an empty line at the top of a class
+# It's ok to have an empty line at the top of a class, module, or block
 #
 Style/EmptyLinesAroundClassBody:
+  Enabled: false
+Style/EmptyLinesAroundModuleBody:
+  Enabled: false
+Style/EmptyLinesAroundBlockBody:
   Enabled: false
 
 # Allow using Foo::Bar style class declaration style
 #
 Style/ClassAndModuleChildren:
   Enabled: false
+
+# Don't care if gems aren't sorted alphabetically
+#
+Bundler/OrderedGems:
+  Enabled: false
+
+# Dont require empty methods are on a single line
+#
+Style/EmptyMethod:
+  Enabled: false
+
+# Don't enforce block length in specs or other files where blocks tend to be long
+#
+Metrics/BlockLength:
+  Exclude:
+    - 'Rakefile'
+    - '**/*.rake'
+    - 'spec/**/*.rb'

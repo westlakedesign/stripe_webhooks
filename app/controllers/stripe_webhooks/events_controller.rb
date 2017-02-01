@@ -8,7 +8,7 @@ module StripeWebhooks
       begin
         raw_data = JSON.parse(request.body.read)
       rescue JSON::ParserError => e
-        render text: e.message, status: 400
+        render plain: e.message, status: 400
         return
       end
 
@@ -16,9 +16,9 @@ module StripeWebhooks
 
       if @event.save()
         StripeWebhooks::ProcessorJob.perform_later(@event)
-        render nothing: true, status: 200
+        head :created
       else
-        render text: @event.errors.full_messages.first, status: 422
+        render plain: @event.errors.full_messages.first, status: 422
       end
     end
 

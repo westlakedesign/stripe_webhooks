@@ -18,14 +18,14 @@ Gem::Specification.new do |s|
   s.files = Dir['{app,config,db,lib}/**/*', 'MIT-LICENSE', 'Rakefile', 'README.md']
   s.test_files = Dir['spec/**/*'].reject { |f| f.match(%r{^spec\/dummy\/(log|tmp)}) }
 
-  s.add_dependency 'rails', '< 5.0'
+  s.add_dependency 'rails', '< 6.0'
   s.add_dependency 'stripe', '>= 1.18.0'
 
   s.add_development_dependency 'mysql2'
-  s.add_development_dependency 'rspec-rails', '~> 3.2.1'
-  s.add_development_dependency 'factory_girl_rails', '~> 4.5.0'
-  s.add_development_dependency 'database_cleaner', '~> 1.4.1'
-  s.add_development_dependency 'simplecov', '~> 0.9.2'
+  s.add_development_dependency 'rspec-rails', '~> 3.5.0'
+  s.add_development_dependency 'factory_girl_rails', '~> 4.8.0'
+  s.add_development_dependency 'database_cleaner'
+  s.add_development_dependency 'simplecov'
   s.add_development_dependency 'stripe-ruby-mock'
   s.add_development_dependency 'rubocop'
   s.add_development_dependency 'codeclimate-test-reporter'
