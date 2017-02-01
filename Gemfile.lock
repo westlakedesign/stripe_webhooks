@@ -1,8 +1,8 @@
 PATH
   remote: .
   specs:
-    stripe_webhooks (0.3)
-      rails (< 6.0)
+    stripe_webhooks (0.4)
+      rails (>= 4.0)
       stripe (>= 1.18.0)
 
 GEM

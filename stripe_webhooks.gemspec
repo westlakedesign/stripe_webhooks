@@ -18,7 +18,7 @@ Gem::Specification.new do |s|
   s.files = Dir['{app,config,db,lib}/**/*', 'MIT-LICENSE', 'Rakefile', 'README.md']
   s.test_files = Dir['spec/**/*'].reject { |f| f.match(%r{^spec\/dummy\/(log|tmp)}) }
 
-  s.add_dependency 'rails', '< 6.0'
+  s.add_dependency 'rails', '>= 4.0'
   s.add_dependency 'stripe', '>= 1.18.0'
 
   s.add_development_dependency 'mysql2'
