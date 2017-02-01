@@ -15,9 +15,9 @@ module StripeWebhooks
         end
         template 'callback.rb.erb', "app/callbacks/#{name.underscore}_callback.rb"
 
-        if defined?(RSpec)
+        if defined?(RSpec) && Dir.exist?(Rails.root.join('spec'))
           template 'callback_spec.rb.erb',
-            "#{RSpec.configuration.default_path}/callbacks/#{name.underscore}_callback_spec.rb"
+            Rails.root.join('spec', 'callbacks', "#{name.underscore}_callback_spec.rb")
         end
       end
 
