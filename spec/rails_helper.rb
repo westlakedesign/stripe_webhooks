@@ -1,5 +1,7 @@
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 ENV['RAILS_ENV'] ||= 'test'
+require 'simplecov'
+SimpleCov.start 'rails'
 require 'spec_helper'
 require File.expand_path('../dummy/config/environment.rb', __FILE__)
 require 'rspec/rails'
@@ -8,8 +10,6 @@ require 'rspec/rails'
 require 'database_cleaner'
 require 'factory_girl_rails'
 require 'stripe_mock'
-require 'simplecov'
-SimpleCov.start 'rails'
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
