@@ -39,6 +39,14 @@ module StripeWebhooks
         expect(event.is_authentic).to eq(false)
         expect(event.is_processed).to eq(true)
       end
+
+      it 'catches a permission error' do
+        event = StripeWebhooks::Event.create(stripe_event_id: 'test')
+        allow(event).to receive(:stripe_event) { raise Stripe::PermissionError }
+        expect do
+          event.validate!
+        end.to change(event, :is_processed).to(true)
+      end
     end
 
     describe '#run_callbacks!' do

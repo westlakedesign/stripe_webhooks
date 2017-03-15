@@ -14,17 +14,15 @@ module StripeWebhooks
 
     def validate!
       return true if is_authentic
-      begin
-        event = stripe_event()
-        update_attributes(is_processed: true,
-                          is_authentic: true,
-                          stripe_event_type: event.type,
-                          stripe_created_at: Time.zone.at(event.created).to_datetime)
-        return true
-      rescue Stripe::InvalidRequestError
-        update_attributes(is_processed: true, is_authentic: false)
-        return false
-      end
+      event = stripe_event()
+      update_attributes(is_processed: true,
+                        is_authentic: true,
+                        stripe_event_type: event.type,
+                        stripe_created_at: Time.zone.at(event.created).to_datetime)
+      return true
+    rescue Stripe::InvalidRequestError, Stripe::PermissionError
+      update_attributes(is_processed: true, is_authentic: false)
+      return false
     end
 
     def run_callbacks!
